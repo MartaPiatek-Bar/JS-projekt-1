@@ -16,9 +16,8 @@ let ID = 0;
 let categoryIcon;
 let selectedCategory;
 
-
 /*
-1, 2,3 -> [{ id: 0, value: 123}]
+1, 2, 3 -> [{ id: 0, value: 123}]
 */
 
 const showPanel = () => {
@@ -177,7 +176,6 @@ const saveTransatcion = (id) => {
   const editBtn = transactionToSave.querySelector('.edit');
   editBtn.style.display = 'block';
 
-  
   transactions.find((transaction) => transaction.id === `id-${id}`).amount =
     Number(
       `${transaction.type === '+Income' ? '' : '-'}` +
@@ -187,12 +185,12 @@ const saveTransatcion = (id) => {
     countMoney();
 };
 
-const deleteAllTransactions = () => {
-  incomeSection.innerHTML = "<h3>Income</h3>";
-  expensesSection.innerHTML = "<h3>Outgo</h3>";
-  availableMoney.textContent = "0 PLN";
-  description.innerHTML = "The balance is zero";
-};
+// const deleteAllTransactions = () => {
+//   incomeSection.innerHTML = "<h3>Income</h3>";
+//   expensesSection.innerHTML = "<h3>Outgo</h3>";
+//   availableMoney.textContent = "0 PLN";
+//   description.innerHTML = "The balance is zero";
+// };
 
 addTransactionBtn.addEventListener("click", showPanel);
 cancelBtn.addEventListener("click", closePanel);
