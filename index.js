@@ -137,12 +137,13 @@ const setMoneyAvailabilityText = (newMoney) => {
 
 const deleteTransatcion = (id) => {
   const transactionToDelete = document.getElementById(`id-${id}`);
+  const indexToDelete = transactions.findIndex((transaction) => transaction.id === `id-${id}`);
 
   transactionToDelete.classList.contains("income")
     ? incomeSection.removeChild(transactionToDelete)
     : expensesSection.removeChild(transactionToDelete);
 
-    transactions.splice(id, 1);
+    transactions.splice(indexToDelete, 1);
   countMoney();
 };
 
@@ -176,12 +177,13 @@ const saveTransatcion = (id) => {
   const editBtn = transactionToSave.querySelector('.edit');
   editBtn.style.display = 'block';
 
-  transactions.find((transaction) => transaction.id === `id-${id}`).amount =
-    Number(
-      `${transaction.type === '+Income' ? '' : '-'}` +
-        transactionAmount.innerText
-    );
-
+  transactions.find((transaction) => {
+    if (transaction.id === `id-${id}`) {
+      transaction.amount = Number(`${transaction.type === '+Income' ? '' : '-'}` +
+      transactionAmount.innerText);
+      transaction.name = transactionName.innerText;
+    }
+  });  
     countMoney();
 };
 
