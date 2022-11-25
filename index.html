@@ -5,76 +5,75 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home budget</title>
-    <link rel="stylesheet" href="reset.css" type="text/css" />
-    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <link rel="stylesheet" href="css/reset.css" type="text/css" />
+    <link rel="stylesheet" href="css/styles.css" type="text/css" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Roboto:ital@0;1&display=swap"
     />
-</head>
+  </head>
 
-<body>
-
+  <body>
     <header>
-        <h1><i class="fa-solid fa-money-bill-transfer"></i> Home budget</h1>
+      <h1><i class="fa-solid fa-money-bill-transfer"></i> Home budget</h1>
     </header>
 
     <main>
-        <section class="transactions">
-            <h2 class="title">Transactions</h2>
-            <div class="transaction-list">
-                <div class="income-area">
-                    <h3>Income</h3>
-                </div>
-                <div class="expenses-area">
-                    <h3>Outgo</h3>
-                </div>
-            </div>
-        </section>
+      <section class="transactions">
+        <h2 class="title">Transactions</h2>
+        <div class="transaction-list">
+          <div class="income-area">
+            <h3>Income</h3>
+          </div>
+          <div class="expenses-area">
+            <h3>Outgo</h3>
+          </div>
+        </div>
+      </section>
 
-        <section class="options">
-            <div>
-                <h2 class="title" id="description"> The balance is zero</h2>
-                <p class="available-money">0 PLN</p>
-            </div>
-            <div class="controls">
-                <button class="add-transaction"><i class="fas fa-plus"></i> Add transaction</button>
-                <!-- <button class="delete-all"><i class="far fa-trash-alt"></i> Delete all</button> -->
-            </div>
-        </section>
+      <section class="options">
+        <div>
+          <h2 class="title" id="description">The balance is zero</h2>
+          <p class="available-money">0 pln</p>
+        </div>
+        <div class="controls">
+          <button class="add-transaction">
+            <i class="fas fa-plus"></i> Add transaction
+          </button>
+        </div>
+      </section>
     </main>
 
     <div class="add-transaction-panel">
-        <h2 class="title">Add new transaction</h2>
-        <label for="name">Name</label>
-        <small>Enter transaction's name</small>
-        <input type="text" id="name"></input>
+      <h2 class="title">Add new transaction</h2>
+      <label for="name">Name</label>
+      <small>Enter transaction's name</small>
+      <input type="text" id="name" />
 
-        <label for="amount">Amount</label>
-        <small>Enter the amount</small>
-        <input type="number" id="amount" min="0">
+      <label for="amount">Amount</label>
+      <small>Enter the amount</small>
+      <input type="number" id="amount" min="0" />
 
-        <label for="category">Choose category</label>
-        <small> + for income, - for expense</small>
-        <select id="category" onchange="selectCategory()">
-            <option value="none" selected disabled></option>
-            <option value="income">+Income</option>
-            <option value="shopping">- House</option>
-            <option value="food">- Food</option>
-            <option value="cinema">- Culture</option>
-        </select>
+      <label for="category">Choose category</label>
+      <small> + for income, - for expense</small>
+      <select id="category" onchange="selectCategory()">
+        <option value="none" selected disabled></option>
+        <option value="income">+Income</option>
+        <option value="shopping">- House</option>
+        <option value="food">- Food</option>
+        <option value="cinema">- Culture</option>
+      </select>
 
-        <div class="panel-buttons">
-            <button class="save">Save</button>
-            <button class="cancel">Cancel</button>
-        </div>
+      <div class="panel-buttons">
+        <button class="save">Save</button>
+        <button class="cancel">Cancel</button>
+      </div>
     </div>
-    
+
     <script
       src="https://kit.fontawesome.com/6ed078a51a.js"
       crossorigin="anonymous"
     ></script>
     <script src="index.js"></script>
-</body>
-
+  </body>
 </html>
