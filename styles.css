@@ -109,10 +109,7 @@ h2.title {
   transition: transform 0.3s;
 }
 
-.delete:hover {
-  transform: scale(0.8);
-}
-
+.delete:hover,
 .edit:hover {
   transform: scale(0.8);
 }
