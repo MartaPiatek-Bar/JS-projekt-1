@@ -10,15 +10,10 @@ const categorySelect = document.querySelector("#category");
 const addTransactionBtn = document.querySelector(".add-transaction");
 const saveBtn = document.querySelector(".save");
 const cancelBtn = document.querySelector(".cancel");
-const deleteAllBtn = document.querySelector(".delete-all");
 
 let ID = 0;
 let categoryIcon;
 let selectedCategory;
-
-/*
-1, 2, 3 -> [{ id: 0, value: 123}]
-*/
 
 const showPanel = () => {
   addTransactionPanel.style.display = "flex";
@@ -49,16 +44,13 @@ const clearInputs = () => {
 
 const transactions = [];
 const createNewTransaction = () => {
-
-  console.log(transactions);
-
-  const newTransaction = document.createElement('div');
-  newTransaction.classList.add('transaction');
-  newTransaction.setAttribute('id', `id-${ID}`);
+  const newTransaction = document.createElement("div");
+  newTransaction.classList.add("transaction");
+  newTransaction.setAttribute("id", `id-${ID}`);
   checkCategory(selectedCategory);
 
   const amount = +(
-    `${selectedCategory === '+Income' ? '' : '-'}` + amountInput.value
+    `${selectedCategory === "+Income" ? "" : "-"}` + amountInput.value
   );
 
   const transaction = {
@@ -75,26 +67,24 @@ const createNewTransaction = () => {
         ${nameInput.value}
         </p>
         <p class="transaction-amount">
-        ${amountInput.value} </p> PLN
-        <button class="delete" onclick="deleteTransatcion(${ID})"><i class="fas fa-times"></i></button>
-        <button class="edit" onclick="editTransatcion(${ID})"><i class="fa-solid fa-pencil"></i></button>
-        <button class="save-edit" onclick="saveTransatcion(${ID})"><i class="fa-solid fa-floppy-disk"></i></button>
+        ${amountInput.value} </p> pln
+        <button class="delete" onclick="deleteTransaction(${ID})"><i class="fas fa-times"></i></button>
+        <button class="edit" onclick="editTransaction(${ID})"><i class="fa-solid fa-pencil"></i></button>
+        <button class="save-edit" onclick="saveTransaction(${ID})"><i class="fa-solid fa-floppy-disk"></i></button>
     `;
 
   amount > 0
     ? incomeSection.appendChild(newTransaction) &&
-      newTransaction.classList.add('income')
+      newTransaction.classList.add("income")
     : expensesSection.appendChild(newTransaction) &&
-      newTransaction.classList.add('expense');
-  console.log(parseFloat(amount));
+      newTransaction.classList.add("expense");
 
   countMoney();
   closePanel();
   ID++;
   clearInputs();
-  const saveEdit = newTransaction.querySelector('.save-edit');
-  saveEdit.style.display = 'none';
-  console.log(saveEdit);
+  const saveEdit = newTransaction.querySelector(".save-edit");
+  saveEdit.style.display = "none";
 };
 
 const selectCategory = () => {
@@ -104,13 +94,16 @@ const selectCategory = () => {
 const checkCategory = (transaction) => {
   switch (transaction) {
     case "+Income":
-      categoryIcon = '<i class="fa-solid fa-sack-dollar" style="color: #a1da00;"></i>';
+      categoryIcon =
+        '<i class="fa-solid fa-sack-dollar" style="color: #a1da00;"></i>';
       break;
     case "- House":
-      categoryIcon = '<i class="fa-solid fa-house-user" style="color: #0073df;"></i>';
+      categoryIcon =
+        '<i class="fa-solid fa-house-user" style="color: #0073df;"></i>';
       break;
     case "- Food":
-      categoryIcon = '<i class="fa-solid fa-carrot" style="color: #0073df;"></i>';
+      categoryIcon =
+        '<i class="fa-solid fa-carrot" style="color: #0073df;"></i>';
       break;
     case "- Culture":
       categoryIcon = '<i class="fa-solid fa-film" style="color: #0073df;"></i>';
@@ -119,9 +112,10 @@ const checkCategory = (transaction) => {
 };
 
 const countMoney = () => {
-  const money = transactions.map(tr => tr.amount);
+  const money = transactions.map((tr) => tr.amount);
   const newMoney = money.reduce((a, b) => a + b, 0);
-  availableMoney.textContent = `${newMoney} PLN`;
+
+  availableMoney.textContent = `${newMoney} pln`;
   setMoneyAvailabilityText(newMoney);
 };
 
@@ -135,66 +129,64 @@ const setMoneyAvailabilityText = (newMoney) => {
   }
 };
 
-const deleteTransatcion = (id) => {
+const deleteTransaction = (id) => {
   const transactionToDelete = document.getElementById(`id-${id}`);
-  const indexToDelete = transactions.findIndex((transaction) => transaction.id === `id-${id}`);
+  const indexToDelete = transactions.findIndex(
+    (transaction) => transaction.id === `id-${id}`
+  );
 
   transactionToDelete.classList.contains("income")
     ? incomeSection.removeChild(transactionToDelete)
     : expensesSection.removeChild(transactionToDelete);
 
-    transactions.splice(indexToDelete, 1);
+  transactions.splice(indexToDelete, 1);
   countMoney();
 };
 
-const editTransatcion = (id) => {
+const editTransaction = (id) => {
   const transactionToEdit = document.getElementById(`id-${id}`);
-  const transactionName = transactionToEdit.querySelector('.transaction-name');
-  const transactionAmount = transactionToEdit.querySelector('.transaction-amount');
+  const transactionName = transactionToEdit.querySelector(".transaction-name");
+  const transactionAmount = transactionToEdit.querySelector(
+    ".transaction-amount"
+  );
+
   transactionName.contentEditable = true;
   transactionAmount.contentEditable = true;
-  const saveEdit = transactionToEdit.querySelector('.save-edit');
+
+  const saveEdit = transactionToEdit.querySelector(".save-edit");
   saveEdit.style.display = "block";
-  const editBtn = transactionToEdit.querySelector('.edit');
+
+  const editBtn = transactionToEdit.querySelector(".edit");
   editBtn.style.display = "none";
 };
 
-const saveTransatcion = (id) => {
-  const transaction = transactions.find(
-    (transaction) => transaction.id === `id-${id}`
-  );
-
+const saveTransaction = (id) => {
   const transactionToSave = document.getElementById(`id-${id}`);
-  const transactionName = transactionToSave.querySelector('.transaction-name');
+  const transactionName = transactionToSave.querySelector(".transaction-name");
   const transactionAmount = transactionToSave.querySelector(
-    '.transaction-amount'
+    ".transaction-amount"
   );
 
   transactionName.contentEditable = false;
   transactionAmount.contentEditable = false;
-  const saveEdit = transactionToSave.querySelector('.save-edit');
-  saveEdit.style.display = 'none';
-  const editBtn = transactionToSave.querySelector('.edit');
-  editBtn.style.display = 'block';
+
+  const saveEdit = transactionToSave.querySelector(".save-edit");
+  saveEdit.style.display = "none";
+  const editBtn = transactionToSave.querySelector(".edit");
+  editBtn.style.display = "block";
 
   transactions.find((transaction) => {
     if (transaction.id === `id-${id}`) {
-      transaction.amount = Number(`${transaction.type === '+Income' ? '' : '-'}` +
-      transactionAmount.innerText);
+      transaction.amount = Number(
+        `${transaction.type === "+Income" ? "" : "-"}` +
+          transactionAmount.innerText
+      );
       transaction.name = transactionName.innerText;
     }
-  });  
-    countMoney();
+  });
+  countMoney();
 };
-
-// const deleteAllTransactions = () => {
-//   incomeSection.innerHTML = "<h3>Income</h3>";
-//   expensesSection.innerHTML = "<h3>Outgo</h3>";
-//   availableMoney.textContent = "0 PLN";
-//   description.innerHTML = "The balance is zero";
-// };
 
 addTransactionBtn.addEventListener("click", showPanel);
 cancelBtn.addEventListener("click", closePanel);
 saveBtn.addEventListener("click", checkForm);
-deleteAllBtn.addEventListener("click", deleteAllTransactions);
