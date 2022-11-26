@@ -167,24 +167,28 @@ const saveTransaction = (id) => {
     ".transaction-amount"
   );
 
-  transactionName.contentEditable = false;
-  transactionAmount.contentEditable = false;
+  if (!/^(\d+(?:,\d{1,2})?).*/.test(Number(transactionAmount.textContent))) {
+    alert("Wrong value. Provide number.");
+  } else {
+    transactionName.contentEditable = false;
+    transactionAmount.contentEditable = false;
 
-  const saveEdit = transactionToSave.querySelector(".save-edit");
-  saveEdit.style.display = "none";
-  const editBtn = transactionToSave.querySelector(".edit");
-  editBtn.style.display = "block";
+    const saveEdit = transactionToSave.querySelector(".save-edit");
+    saveEdit.style.display = "none";
+    const editBtn = transactionToSave.querySelector(".edit");
+    editBtn.style.display = "block";
 
-  transactions.find((transaction) => {
-    if (transaction.id === `id-${id}`) {
-      transaction.amount = Number(
-        `${transaction.type === "+Income" ? "" : "-"}` +
-          transactionAmount.innerText
-      );
-      transaction.name = transactionName.innerText;
-    }
-  });
-  countMoney();
+    transactions.find((transaction) => {
+      if (transaction.id === `id-${id}`) {
+        transaction.amount = Number(
+          `${transaction.type === "+Income" ? "" : "-"}` +
+            transactionAmount.innerText
+        );
+        transaction.name = transactionName.innerText;
+      }
+    });
+    countMoney();
+  }
 };
 
 addTransactionBtn.addEventListener("click", showPanel);
